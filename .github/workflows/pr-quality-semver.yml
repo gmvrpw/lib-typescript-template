@@ -1,7 +1,7 @@
 name: "PR Semver Quality Check"
 on:
   pull_request:
-    types: [opened, reopened, labeled, unlabeled]
+    types: [labeled, unlabeled]
     branches: main
 permissions:
   contents: read
