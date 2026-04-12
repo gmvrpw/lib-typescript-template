@@ -19,7 +19,7 @@ jobs:
               - 'lib/**/*'
 
   check-semver-label:
-    needs: version-changed
+    needs: check-version-changed
     runs-on: ubuntu-latest
     if: ${{ needs.check-version-changed.outputs.changed == 'true' }}
     steps:

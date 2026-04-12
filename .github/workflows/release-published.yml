@@ -4,12 +4,11 @@ on:
     types: [published]
 jobs:
   publish:
-    steps:
-      uses: gmvrpw/t15i/.github/workflows/nodejs-lib-release.yml@main
-      with: 
-        branch: ${{ github.event.repository.default_branch }}
-        tag: ${{ github.event.release.tag_name }}
-      secrets:
-        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      permissions:
-        contents: write
+    uses: gmvrpw/t15i/.github/workflows/nodejs-lib-release.yml@main
+    with: 
+      branch: ${{ github.event.repository.default_branch }}
+      tag: ${{ github.event.release.tag_name }}
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    permissions:
+      contents: write
