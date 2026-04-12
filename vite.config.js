@@ -21,6 +21,7 @@ export default {
   },
   test: {
     dir: "test",
+    passWithNoTests: true,
     setupFiles: "test/setup.ts",
     browser: {
       enabled: true,
