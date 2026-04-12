@@ -1,0 +1,42 @@
+name: "PR Semver Quality Check"
+on:
+  pull_request:
+    types: [opened, reopened, labeled, unlabeled]
+    branches: main
+permissions:
+  contents: read
+jobs:
+  check-version-changed:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.changed.outputs.value }}
+    steps:
+      - id: changes
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            value:
+              - 'lib/**/*'
+
+  check-semver-label:
+    needs: version-changed
+    runs-on: ubuntu-latest
+    if: ${{ needs.check-version-changed.outputs.changed == 'true' }}
+    steps:
+      - name: "Check semver labels"
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const labels = context.payload.pull_request.labels.map(label => label.name);
+            console.log('PR labels:', labels);
+
+            const requiredLabels = ['breaking', 'feature', 'fix'];
+            const hasRequiredLabel = requiredLabels.some(label => labels.includes(label));
+
+            if (hasRequiredLabel) {
+              console.log('Required label found.');
+            } else {
+              core.setFailed(
+                'Library changes detected, but PR does not have any of required labels: breaking, feature, fix.'
+              );
+            }
