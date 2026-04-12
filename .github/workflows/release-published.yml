@@ -12,3 +12,4 @@ jobs:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     permissions:
       contents: write
+      packages: write
