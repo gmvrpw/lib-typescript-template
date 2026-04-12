@@ -11,7 +11,7 @@ jobs:
     outputs:
       changed: ${{ steps.changed.outputs.value }}
     steps:
-      - id: changes
+      - id: changed
         uses: dorny/paths-filter@v3
         with:
           filters: |
