@@ -3,13 +3,24 @@ on:
   release:
     types: [published]
 jobs:
+  generate-token:
+    runs-on: ubuntu-latest
+    outputs:
+      token: ${{ steps.generator.outputs.token }}
+    steps:
+      - name: Generate token
+        id: generator
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.NODEJS_RELEASE_BOT_ID }}
+          private-key: ${{ secrets.NODEJS_RELEASE_BOT_PRIVATE_KEY }}:
+
   publish:
+    needs: generate-token
     uses: gmvrpw/t15i/.github/workflows/nodejs-lib-release.yml@main
     with: 
       branch: ${{ github.event.repository.default_branch }}
       tag: ${{ github.event.release.tag_name }}
     secrets:
+      GH_TOKEN: ${{ needs.generate-token.outputs.token }}
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-    permissions:
-      contents: write
-      packages: write
