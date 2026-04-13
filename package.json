@@ -39,7 +39,7 @@
     "ci:typecheck": "npm run ci:typecheck:lib && npm run ci:typecheck:tests",
     "ci:typecheck:lib": "tsc -p lib/tsconfig.json --noEmit true",
     "ci:typecheck:tests": "tsc -p test/tsconfig.json --noEmit true",
-    "ci:test": "vitest run --coverage",
+    "ci:test": "npx playwright install && vitest run --coverage --browser.headless",
     "ci:build": "vite build"
   },
   "devDependencies": {
