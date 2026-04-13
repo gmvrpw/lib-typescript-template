@@ -4,14 +4,6 @@ lib:
       - any-glob-to-any-file:
         - 'lib/**/*'
 
-breaking:
-  - all:
-    - changed-files: 
-      - any-glob-to-any-file:
-        - 'lib/**/*'
-    - head-branch:
-      - '^breaking'
-
 feature:
   - all:
     - changed-files: 
