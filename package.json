@@ -27,7 +27,7 @@
   "scripts": {
     "lint": "eslint lib test",
     "format": "prettier --check --write lib test",
-    "typecheck": "tsc -p lib/tsconfig.json --noEmit true && tsc -p test/tsconfig.json --noEmit true",
+    "typecheck": "tsc -p lib/tsconfig.json && tsc -p test/tsconfig.json",
     "test": "vitest watch --coverage",
     "build": "vite build",
     "ci:lint": "eslint --max-warnings 1 lib test",
@@ -37,8 +37,8 @@
     "ci:format:lib": "prettier --list-different lib",
     "ci:format:tests": "prettier --list-different tests",
     "ci:typecheck": "npm run ci:typecheck:lib && npm run ci:typecheck:tests",
-    "ci:typecheck:lib": "tsc -p lib/tsconfig.json --noEmit true",
-    "ci:typecheck:tests": "tsc -p test/tsconfig.json --noEmit true",
+    "ci:typecheck:lib": "tsc -p lib/tsconfig.json",
+    "ci:typecheck:tests": "tsc -p test/tsconfig.json",
     "ci:test": "npx playwright install && vitest run --coverage --browser.headless",
     "ci:build": "vite build"
   },
